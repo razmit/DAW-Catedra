@@ -1,0 +1,13 @@
+.keypad button {
+    height: 70px;
+    font-size: 24px;
+}
+
+.keypad .row {
+    justify-content: center;
+}
+
+.my-3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
