@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transacciones</title>
+    <title>Depósito</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../css/transacciones.css">
+    <link rel="stylesheet" href="../css/servicios.css">
 </head>
 <body>
     <div class="d-flex vh-100">
@@ -69,39 +69,83 @@
             </div>
         </nav>
 
+        <!-- Cuerpo principal -->
         <div id="main-content" class="flex-grow-1 p-4">
             <div class="container">
-                <h3>Haga una transferencia</h3>
+                <h3>Servicios</h3>
+                <div class="row">
+                    <div class="col-md-3">
+                        <button class="btn btn-primary w-100 mb-3" onclick="showService('electricity')">Pagar electricidad</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary w-100 mb-3" onclick="showService('water')">Pagar agua</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary w-100 mb-3" onclick="showService('cellplan')">Pagar telefonía</button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary w-100 mb-3" onclick="showService('internet')">Pagar internet</button>
+                    </div>
+                </div>
 
-                <form id="transactionForm">
-                    <!-- Cuenta recipiente -->
-                    <div class="mb-3">
-                        <label for="recipientAccount" class="form-label">Número de cuenta del recipiente</label>
-                        <input type="text" class="form-control" id="recipientAccount" placeholder="Enter recipient account number" required>
+                <!-- Formularios -->
+                <div id="serviceForms">
+                    <!-- Electricidad -->
+                    <div id="electricity" class="service-form" style="display:none;">
+                        <h4>Pagar electricidad</h4>
+                        <form id="electricityForm">
+                            <div class="mb-3">
+                                <label for="electricityAmount" class="form-label">Cantidad</label>
+                                <input type="number" class="form-control" id="electricityAmount" placeholder="Ingrese la cantidad">
+                            </div>
+                            <button type="submit" class="btn btn-primary" onclick="submitPayment('electricity')">Pagar electricidad</button>
+                        </form>
                     </div>
 
-                    <!-- Cantidad -->
-                    <div class="mb-3">
-                        <label for="transactionAmount" class="form-label">Cantidad</label>
-                        <input type="number" class="form-control" id="transactionAmount" placeholder="Enter amount" min="0" step="0.01" required>
+                    <!-- Agua -->
+                    <div id="water" class="service-form" style="display:none;">
+                        <h4>Pagar agua</h4>
+                        <form id="waterForm">
+                            <div class="mb-3">
+                                <label for="waterAmount" class="form-label">Cantidad</label>
+                                <input type="number" class="form-control" id="waterAmount" placeholder="Ingrese la cantidad">
+                            </div>
+                            <button type="submit" class="btn btn-primary" onclick="submitPayment('water')">Pagar agua</button>
+                        </form>
                     </div>
 
-                    <!-- Descripción -->
-                    <div class="mb-3">
-                        <label for="transactionDescription" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="transactionDescription" rows="3" placeholder="(Opcional) Descripción de la transferencia"></textarea>
+                    <!-- Telefonía -->
+                    <div id="cellplan" class="service-form" style="display:none;">
+                        <h4>Pagar telefonía</h4>
+                        <form id="cellplanForm">
+                            <div class="mb-3">
+                                <label for="cellAmount" class="form-label">Cantidad</label>
+                                <input type="number" class="form-control" id="cellAmount" placeholder="Ingrese la cantidad">
+                            </div>
+                            <button type="submit" class="btn btn-primary" onclick="submitPayment('cellplan')">Pagar telefonía</button>
+                        </form>
                     </div>
-                    <button type="submit" class="btn btn-primary">Transferir</button>
-                </form>
-                
-                <div id="feedbackMessage" class="mt-3"></div>
+
+                    <!-- Internet -->
+                    <div id="internet" class="service-form" style="display:none;">
+                        <h4>Pagar internet</h4>
+                        <form id="internetForm">
+                            <div class="mb-3">
+                                <label for="internetAmount" class="form-label">Cantidad</label>
+                                <input type="number" class="form-control" id="internetAmount" placeholder="Ingrese la cantidad">
+                            </div>
+                            <button type="submit" class="btn btn-primary" onclick="submitPayment('internet')">Pagar internet</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Include SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="../js/transacciones.js"></script>
+    <script src="../js/servicios.js"></script>
 </body>
 </html>
