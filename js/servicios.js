@@ -5,7 +5,7 @@ function showService(serviceId) {
     document.getElementById(serviceId).style.display = 'block';
 }
 
-// Function to handle service payments
+// Pago de servicios
 function submitPayment(service) {
     
     // Prevent the default form submission
@@ -49,4 +49,19 @@ function submitPayment(service) {
             confirmButtonText: 'OK'
         });
     }
+}
+
+function logout() {
+    Swal.fire({
+        title: 'Salir',
+        text: '¿Estás seguro que deseas cerrar sesión?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Salir',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = 'index.html'; 
+        }
+    });
 }

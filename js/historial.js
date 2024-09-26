@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Data para la gráfica de transacciones
-    const labels = ["12/30/2023", "12/29/2023", "12/28/2023"]; // Fechas
+    const labels = ["30/11/2023", "5/12/2023", "3/3/2024"]; // Fechas
     const data = {
         labels: labels,
         datasets: [{
-            label: 'Transaction Amounts',
+            label: 'Cantidad de transacciones',
             data: [500, -189, -67.82], // 
             backgroundColor: [
                 'rgba(75, 192, 192, 0.2)', // Verde para depósito
@@ -38,3 +38,18 @@ document.addEventListener("DOMContentLoaded", function() {
         config
     );
 });
+
+function logout() {
+    Swal.fire({
+        title: 'Salir',
+        text: '¿Estás seguro que deseas cerrar sesión?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Salir',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = 'index.html'; 
+        }
+    });
+}
