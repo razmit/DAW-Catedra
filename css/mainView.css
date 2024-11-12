@@ -23,3 +23,24 @@
 .bi {
     font-size: 1.5rem;
 }
+
+.transaction-item {
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.transaction-deposit {
+    background-color: #e0f7e9; /* Light green background */
+    color: #2e7d32; /* Dark green text */
+}
+
+.transaction-withdraw {
+    background-color: #fdecea; /* Light red background */
+    color: #c62828; /* Dark red text */
+}
+
+.transaction-transfer {
+    background-color: #e3f2fd; /* Light blue background */
+    color: #1565c0; /* Dark blue text */
+}

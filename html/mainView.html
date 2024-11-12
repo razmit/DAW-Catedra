@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="../js/validate.js"></script>
     <link rel="stylesheet" href="../css/mainView.css">
 </head>
 <body>
@@ -28,7 +29,7 @@
                     <li class="nav-item mb-2">
                         <a href="transacciones.html" class="btn custom-btn w-100 d-flex align-items-center justify-content-center text-decoration-none">
                             <span>Hacer transacción</span>
-                            <i class="bi bi-credit-card"></i>
+                            <i class="bi bi-credit-card ms-2"></i>
                         </a>
                     </li>
 
@@ -67,61 +68,46 @@
             </div>
         </nav>
         
-<div id="main-content" class="flex-grow-1 p-4">
-    <div class="container">
-        <div class="row mb-4">
-            <div class="col">
-                <h3>Bienvenido, Jimmy</h3>
-                <p id="current-date"></p>
-            </div>
-        </div>
-        
-        <div class="row mb-4">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Información de la cuenta</h5>
-                        <p class="card-text">Número de cuenta: 1587 9985 3364 4857</p>
-                        <p class="card-text">Tipo de cuenta: Ahorro</p>
-                        <p class="card-text">Balance: $0.58</p>
-                        <p class="card-text">Intereses acumulados: -$9.68</p>
-                        <p class="card-text">Último ingreso: 14/6/2024 14:49</p>
+        <div id="main-content" class="flex-grow-1 p-4">
+            <div class="container">
+                <div class="row mb-4">
+                    <div class="col">
+                        <h3 id="welcome-sign">Bienvenido, Jimmy</h3>
+                        <p id="current-date"></p>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Transacciones recientes</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item">Depósito: $500 en 08/14/2024</li>
-                            <li class="list-group-item">Retiro: $22 en 09/16/2024</li>
-                            <li class="list-group-item">Pago: $50 a ANDA en 04/25/2023</li>
-                        </ul>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Información de la cuenta</h5>
+                                <p class="card-text">Número de cuenta: </p>
+                                <p class="card-text">Tipo de cuenta: </p>
+                                <p class="card-text">Balance: </p>
+                                <p class="card-text">Intereses acumulados: </p>
+                                <p class="card-text">Último ingreso: </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="row mb-4">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Pagos pendientes</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item">Tarjeta de crédito: $3000 en 01/05/2024</li>
-                            <li class="list-group-item">Pago de préstamo: $150 on 01/10/2024</li>
-                        </ul>
+                
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Transacciones recientes</h5>
+                                <ul class="list-group transaction-list">
+                                    <!-- Transaction entries aparecerán aquí -->
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                
             </div>
-        </div>
     </div>
 </div>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="../js/mainView.js"></script>
