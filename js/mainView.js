@@ -1,35 +1,45 @@
 class Transaction {
-  constructor(idTrans, originAccount, destinationAccount, amount, typeTrans) {
-    this.idTrans = idTrans;
-    this.originAccount = originAccount;
-    this.destinationAccount = destinationAccount;
-    this.amount = amount;
-    this.timestampTrans = new Date().toLocaleString();
-    this.typeTrans = typeTrans; // Debería ser 'deposit', 'withdraw', o 'transfer'
+  constructor(idTrans, originAccount, destinationAccount, amount, typeTrans, description) {
+      this.idTrans = idTrans;
+      this.originAccount = originAccount;
+      this.destinationAccount = destinationAccount;
+      this.amount = amount;
+      this.timestampTrans = new Date().toLocaleString();
+      this.description = description;
 
-    // Validate transaction type
-    const validTypes = ["deposit", "withdraw", "transfer"];
-    if (validTypes.includes(typeTrans)) {
-      this.typeTrans = typeTrans;
-    } else {
-      throw new Error("Invalid transaction type");
-    }
+      // Validate transaction type
+      const validTypes = ["deposit", "withdraw", "transfer", "service-payment"];
+      if (validTypes.includes(typeTrans)) {
+          this.typeTrans = typeTrans;
+      } else {
+          throw new Error("Invalid transaction type");
+      }
   }
 }
 
 function createTestTransaction() {
   const testTransaction = new Transaction(
-    1, // idTrans
-    "0987654321", // originAccount (Ash's account)
-    "1234567890", // destinationAccount
-    50.0, // amount
-    "deposit" // typeTrans
-  );
+    2,                        // idTrans
+    '0987654321',             // originAccount (Ash's account)
+    'Service-Provider-XYZ',   // destinationAccount
+    75.00,                    // amount
+    'service-payment',        // typeTrans
+    'Electricity bill payment' // description
+);
 
   // Metemos la transaction en LocalStorage
   let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-  transactions.push(testTransaction);
-  localStorage.setItem("transactions", JSON.stringify(transactions));
+  // transactions.push(testTransaction);
+  // localStorage.setItem("transactions", JSON.stringify(transactions));
+  // Check if the test transaction (ID 2) already exists to prevent duplicates
+  const transactionExists = transactions.some(tx => tx.idTrans === testTransaction.idTrans);
+  if (!transactionExists) {
+      // Add the test transaction to the transactions array
+      transactions.push(testTransaction);
+
+      // Save the updated transactions array back to LocalStorage
+      localStorage.setItem('transactions', JSON.stringify(transactions));
+  }
 }
 
 // Traemos las transacciones almacenadas en LocalStorage
@@ -46,12 +56,14 @@ transactions.forEach((transaction) => {
 
     // Color basado en el tipo de transacción
     if (transaction.typeTrans === "deposit") {
-        transactionItem.classList.add("transaction-deposit");
-    } else if (transaction.typeTrans === "withdraw") {
-        transactionItem.classList.add("transaction-withdraw");
-    } else if (transaction.typeTrans === "transfer") {
-        transactionItem.classList.add("transaction-transfer");
-    }
+      transactionItem.classList.add("transaction-deposit");
+  } else if (transaction.typeTrans === "withdraw") {
+      transactionItem.classList.add("transaction-withdraw");
+  } else if (transaction.typeTrans === "transfer") {
+      transactionItem.classList.add("transaction-transfer");
+  } else if (transaction.typeTrans === "service-payment") {
+      transactionItem.classList.add("transaction-service-payment");
+  }
 
     transactionList.appendChild(transactionItem);
 });
@@ -110,6 +122,6 @@ function capitalizeFirstLetter(string) {
 }
 
 window.DOMContentLoaded = () => {
-  createTestTransaction;
+  createTestTransaction();
   loadUserData(); // Ejecutar cuando cargue la página
 };
