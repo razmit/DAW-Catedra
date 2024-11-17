@@ -1,35 +1,72 @@
-// Poner el monto predeterminado en el campo de monto
-function setDepositAmount(amount) {
-    document.getElementById('depositAmount').value = amount;
-}
-
-// Botones de formulario de depósito
-document.getElementById('depositForm').addEventListener('submit', function(event) {
+function handleDeposit(event) {
     event.preventDefault();
 
-    const amount = document.getElementById('depositAmount').value;
-    const source = document.getElementById('depositSource').value;
-    
-    if (amount && source) {
-        // Éxito de SweetAlert
+    // Obtiene la cantidad de depósito del input field
+    const depositInput = document.getElementById("deposit-amount");
+    let depositAmount = parseFloat(depositInput.value);
+
+    // Formatea la cantidad a 2 decimales
+    if (!isNaN(depositAmount)) {
+        depositAmount = parseFloat(depositAmount.toFixed(2));
+        depositInput.value = depositAmount; 
+    }
+
+    // Validar que la cantidad sea un número positivo
+    if (isNaN(depositAmount) || depositAmount <= 0) {
         Swal.fire({
-            title: 'Depósito exitoso',
-            text: `Se ha depositado $${amount} proveniente de ${source}.`,
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then(() => {
-            document.getElementById('depositForm').reset();
+            title: "Error",
+            text: "Ingrese un monto válido (hasta 2 decimales).",
+            icon: "error",
+            confirmButtonText: "Cerrar"
         });
-    } else {
-        // Error de SweetAlert
+        return;
+    }
+
+    // Obtiene la información del usuario almacenada en LocalStorage
+    let storedUsers = JSON.parse(localStorage.getItem("users"));
+    if (storedUsers && storedUsers.length > 0) {
+        let user = storedUsers[0]; 
+        user.balance += depositAmount; // Actualizar el balance del usuario
+
+        // Lo vuelve a guardar actualizado
+        localStorage.setItem("users", JSON.stringify(storedUsers));
+
+        // Añadimos la transacción a la lista
+        const newTransaction = new Transaction(
+            Date.now(),        // ID de transacción única
+            user.account,      
+            user.account,      
+            depositAmount,     
+            "deposit",         
+            `Depósito realizado por ${depositAmount}`
+        );
+
+        let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+        transactions.push(newTransaction);
+        localStorage.setItem("transactions", JSON.stringify(transactions));
+        
         Swal.fire({
-            title: 'Error',
-            text: 'Popr favor, complete todos los campos.', 
-            icon: 'error',
-            confirmButtonText: 'OK'
+            title: "Depósito Exitoso",
+            text: `Se ha depositado $${depositAmount.toFixed(2)} a su cuenta.`,
+            icon: "success",
+            confirmButtonText: "Cerrar"
+        });
+
+        // Limpia el input field
+        depositInput.value = "";
+    } else {
+        Swal.fire({
+            title: "Error",
+            text: "No se encontró información de la cuenta.",
+            icon: "error",
+            confirmButtonText: "Cerrar"
         });
     }
-});
+}
+
+window.onload = function () {
+    document.getElementById("deposit-form").addEventListener("submit", handleDeposit);
+};
 
 function logout() {
     Swal.fire({

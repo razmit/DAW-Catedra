@@ -1,43 +1,23 @@
-class Transaction {
-  constructor(idTrans, originAccount, destinationAccount, amount, typeTrans, description) {
-      this.idTrans = idTrans;
-      this.originAccount = originAccount;
-      this.destinationAccount = destinationAccount;
-      this.amount = amount;
-      this.timestampTrans = new Date().toLocaleString();
-      this.description = description;
-
-      // Validate transaction type
-      const validTypes = ["deposit", "withdraw", "transfer", "service-payment"];
-      if (validTypes.includes(typeTrans)) {
-          this.typeTrans = typeTrans;
-      } else {
-          throw new Error("Invalid transaction type");
-      }
-  }
-}
-
 function createTestTransaction() {
   const testTransaction = new Transaction(
-    2,                        // idTrans
+    4,                        // idTrans
     '0987654321',             // originAccount (Ash's account)
-    'Service-Provider-XYZ',   // destinationAccount
-    75.00,                    // amount
-    'service-payment',        // typeTrans
-    'Electricity bill payment' // description
+    '0987654321',             // destinationAccount
+    54.10,                    // amount
+    'deposit',                // typeTrans
+    'Depósito'                // description
 );
 
-  // Metemos la transaction en LocalStorage
+  // Traemos las transacciones almacenadas en LocalStorage
   let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-  // transactions.push(testTransaction);
-  // localStorage.setItem("transactions", JSON.stringify(transactions));
-  // Check if the test transaction (ID 2) already exists to prevent duplicates
+  
+  // Verificamos si la ID de la transacción ya existe para evitar duplicados
   const transactionExists = transactions.some(tx => tx.idTrans === testTransaction.idTrans);
   if (!transactionExists) {
-      // Add the test transaction to the transactions array
+      // Añade la transacción al array de transacciones
       transactions.push(testTransaction);
 
-      // Save the updated transactions array back to LocalStorage
+      // Guarda el array de transacciones en LocalStorage
       localStorage.setItem('transactions', JSON.stringify(transactions));
   }
 }
@@ -54,6 +34,7 @@ transactions.forEach((transaction) => {
     const capitalizedType = capitalizeFirstLetter(transaction.typeTrans);
     transactionItem.textContent = `${capitalizedType}: $${transaction.amount} en ${transaction.timestampTrans}`;
 
+    console.log("Transaction type:", transaction.typeTrans);
     // Color basado en el tipo de transacción
     if (transaction.typeTrans === "deposit") {
       transactionItem.classList.add("transaction-deposit");
@@ -84,13 +65,14 @@ function logout() {
 }
 
 function loadUserData() {
+  
   // Traemos la data del usuario almacenada en LocalStorage
   const storedUsers = JSON.parse(localStorage.getItem("users"));
   console.log("LocalStorage at loading:", storedUsers);
   if (storedUsers && storedUsers.length > 0) {
     const user = storedUsers[0];
 
-    // Display user data in the account information section
+    // Muestra la data del usuario en la tarjeta
     document.getElementById(
       "welcome-sign"
     ).textContent = `Bienvenido, ${user.username}`;
@@ -121,7 +103,14 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-window.DOMContentLoaded = () => {
+// window.DOMContentLoaded = () => {
+//   createTestTransaction();
+//   loadUserData(); // Ejecutar cuando cargue la página
+//   console.log("PEPE LIVES");
+// };
+
+window.onload = () => {
   createTestTransaction();
   loadUserData(); // Ejecutar cuando cargue la página
-};
+  console.log("PEPE LIVES ON LOAD");
+}

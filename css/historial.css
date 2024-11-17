@@ -1,0 +1,13 @@
+.history-component {
+    margin-top: 20px;
+}
+
+#chart-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.table {
+    margin-top: 20px;
+}

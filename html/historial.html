@@ -72,44 +72,39 @@
 
         <div id="main-content" class="flex-grow-1 p-4">
             <div class="container">
-                <h3>Historial transaccional</h3>
-
-                <!-- Chart.js Canvas -->
-                <div class="mb-4">
-                    <canvas id="transactionChart" width="400" height="200"></canvas>
+                <h3>Historial de Transacciones</h3>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <button class="btn btn-primary w-100" onclick="showComponent('table')">Ver Tabla</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-secondary w-100" onclick="showComponent('chart')">Ver Gráfico</button>
+                    </div>
                 </div>
-                
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead class="table-light">
+
+                <!-- Table -->
+                <div id="table-container" class="history-component">
+                    <table class="table table-striped">
+                        <thead>
                             <tr>
-                                <th>Fecha</th>
+                                <th>ID</th>
+                                <th>Cuenta Origen</th>
+                                <th>Cuenta Destino</th>
+                                <th>Monto</th>
                                 <th>Tipo</th>
-                                <th>Cantidad</th>
                                 <th>Descripción</th>
+                                <th>Fecha</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>30/11/2023</td>
-                                <td>Depósito</td>
-                                <td>$500</td>
-                                <td>Pago de empleador</td>
-                            </tr>
-                            <tr>
-                                <td>5/12/2023</td>
-                                <td>Retiro</td>
-                                <td>-$189</td>
-                                <td>Cajero automático</td>
-                            </tr>
-                            <tr>
-                                <td>3/3/2024</td>
-                                <td>Pago</td>
-                                <td>-$67.82</td>
-                                <td>Pago del recibo de energía eléctrica</td>
-                            </tr>
+                        <tbody id="transaction-table-body">
+                            <!-- Las transacciones van a aparecer aquí -->
                         </tbody>
                     </table>
+                </div>
+
+                <!-- Chart -->
+                <div id="chart-container" class="history-component" style="display: none;">
+                    <canvas id="transaction-chart"></canvas>
                 </div>
             </div>
         </div>
@@ -118,6 +113,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script src="../js/transaction.js"></script>
     <script src="../js/historial.js"></script>
 </body>
 </html>
